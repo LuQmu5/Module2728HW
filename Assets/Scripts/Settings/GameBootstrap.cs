@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class GameBootstrap : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private WalletDisplay _walletDisplay;
+    [SerializeField] private TestAddValueScript _testAddValueScript;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        WalletService walletService = new WalletService();
+
+        _walletDisplay.Init(walletService);
+        _testAddValueScript.Init(walletService);
     }
 }
