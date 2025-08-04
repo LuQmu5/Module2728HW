@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class TimerService
 {
-    private const int OneSecond = 1;
-
-    private uint _initialTime;
-    private uint _currentTime;
-
-    private MonoBehaviour _coroutineRunner;
-    private Coroutine _timerCoroutine;
-    private WaitForSecondsRealtime _tick;
-
+    public ReactiveVariable<uint> CurrentTime { get; private set; } = new();
     public bool IsPaused { get; private set; }
+    public bool IsRunning => !_isFinished && !IsPaused;
 
-    public uint CurrentTime => _currentTime;
-    public uint InitialTime => _initialTime;
-    public float TimeNormalized => _initialTime == 0 ? 0f : (float)_currentTime / _initialTime;
+    public uint InitialTime { get; private set; }
 
     public event Action<uint> TimerStarted;
-    public event Action<uint> CurrentTimeChanged;
     public event Action TimerFinished;
 
-    public TimerService(MonoBehaviour coroutineRunner)
+    private float _startTime;
+    private float _pauseStartTime;
+    private float _totalPausedDuration;
+    private bool _isFinished;
+
+    private MonoBehaviour _runner;
+
+    public TimerService(MonoBehaviour runner)
     {
-        _coroutineRunner = coroutineRunner;
-        _tick = new WaitForSecondsRealtime(OneSecond);
+        _runner = runner;
+        _runner.StartCoroutine(UpdateCoroutine());
     }
 
     public void StartNewTimer(uint seconds)
@@ -34,58 +31,66 @@ public class TimerService
         if (seconds == 0)
             throw new ArgumentOutOfRangeException(nameof(seconds), "Timer duration can't be zero.");
 
-        StopTimer();
-
-        _initialTime = seconds;
-        _currentTime = seconds;
+        InitialTime = seconds;
+        _startTime = Time.realtimeSinceStartup;
+        _totalPausedDuration = 0f;
         IsPaused = false;
+        _isFinished = false;
 
-        TimerStarted?.Invoke(_initialTime);
-        CurrentTimeChanged?.Invoke(_currentTime);
-
-        _timerCoroutine = _coroutineRunner.StartCoroutine(CountDownCoroutine());
+        CurrentTime.Value = seconds;
+        TimerStarted?.Invoke(InitialTime);
     }
 
     public void PauseTimer()
     {
-        if (_timerCoroutine == null || IsPaused)
+        if (IsPaused || _isFinished)
             return;
 
-        _coroutineRunner.StopCoroutine(_timerCoroutine);
-        _timerCoroutine = null;
         IsPaused = true;
+        _pauseStartTime = Time.realtimeSinceStartup;
     }
 
     public void UnpauseTimer()
     {
-        if (_currentTime == 0 || !IsPaused)
+        if (!IsPaused || _isFinished)
             return;
 
         IsPaused = false;
-        _timerCoroutine = _coroutineRunner.StartCoroutine(CountDownCoroutine());
+        _totalPausedDuration += Time.realtimeSinceStartup - _pauseStartTime;
     }
 
     public void StopTimer()
     {
-        if (_timerCoroutine != null)
-        {
-            _coroutineRunner.StopCoroutine(_timerCoroutine);
-            _timerCoroutine = null;
-        }
-
         IsPaused = false;
+        _isFinished = true;
     }
 
-    private IEnumerator CountDownCoroutine()
+    private IEnumerator UpdateCoroutine()
     {
-        while (_currentTime > 0)
-        {
-            yield return _tick;
-            _currentTime--;
-            CurrentTimeChanged?.Invoke(_currentTime);
-        }
+        WaitForEndOfFrame wait = new();
 
-        TimerFinished?.Invoke();
-        _timerCoroutine = null;
+        while (true)
+        {
+            yield return wait;
+
+            if (_isFinished || IsPaused || InitialTime == 0)
+                continue;
+
+            float elapsed = Time.realtimeSinceStartup - _startTime - _totalPausedDuration;
+            float remaining = InitialTime - elapsed;
+
+            if (remaining <= 0f)
+            {
+                CurrentTime.Value = 0;
+                _isFinished = true;
+                TimerFinished?.Invoke();
+            }
+            else
+            {
+                uint secondsRemaining = (uint)Mathf.CeilToInt(remaining);
+                if (secondsRemaining != CurrentTime.Value)
+                    CurrentTime.Value = secondsRemaining;
+            }
+        }
     }
 }

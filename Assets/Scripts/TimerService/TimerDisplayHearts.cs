@@ -15,13 +15,13 @@ public class TimerDisplayHearts : MonoBehaviour
         _timerService = timerService;
 
         _timerService.TimerStarted += OnTimerStarted;
-        _timerService.CurrentTimeChanged += OnTimeChanged;
+        _timerService.CurrentTime.Changed += OnTimeChanged;
     }
 
     private void OnDestroy()
     {
         _timerService.TimerStarted -= OnTimerStarted;
-        _timerService.CurrentTimeChanged -= OnTimeChanged;
+        _timerService.CurrentTime.Changed -= OnTimeChanged;
     }
 
     private void OnTimerStarted(uint time)
@@ -35,11 +35,11 @@ public class TimerDisplayHearts : MonoBehaviour
         }
     }
 
-    private void OnTimeChanged(uint currentTime)
+    private void OnTimeChanged(uint oldValue, uint newValue)
     {
         for (int i = 0; i < _hearts.Count; i++)
         {
-            _hearts[i].SetActive(i < currentTime);
+            _hearts[i].SetActive(i < newValue);
         }
     }
 

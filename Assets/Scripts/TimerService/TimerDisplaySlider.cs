@@ -14,13 +14,13 @@ public class TimerDisplaySlider : MonoBehaviour
         _slider.minValue = 0;
 
         _timerService.TimerStarted += OnTimerStarted;
-        _timerService.CurrentTimeChanged += OnTimeChanged;
+        _timerService.CurrentTime.Changed += OnTimeChanged;
     }
 
     private void OnDestroy()
     {
         _timerService.TimerStarted -= OnTimerStarted;
-        _timerService.CurrentTimeChanged -= OnTimeChanged;
+        _timerService.CurrentTime.Changed -= OnTimeChanged;
     }
 
     private void OnTimerStarted(uint max)
@@ -29,8 +29,8 @@ public class TimerDisplaySlider : MonoBehaviour
         _slider.value = max;
     }
 
-    private void OnTimeChanged(uint time)
+    private void OnTimeChanged(uint oldValue, uint newValue)
     {
-        _slider.value = time;
+        _slider.value = newValue;
     }
 }

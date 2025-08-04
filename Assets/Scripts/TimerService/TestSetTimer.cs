@@ -20,7 +20,7 @@ public class TestSetTimer : MonoBehaviour
         _togglePauseButton.onClick.AddListener(OnTogglePauseClicked);
         _stopButton?.onClick.AddListener(OnStopClicked);
 
-        _timerService.CurrentTimeChanged += OnTimeChanged;
+        _timerService.CurrentTime.Changed += (_, value) => OnTimeChanged(value);
         _timerService.TimerStarted += OnTimeChanged;
     }
 
@@ -30,7 +30,7 @@ public class TestSetTimer : MonoBehaviour
         _togglePauseButton.onClick.RemoveListener(OnTogglePauseClicked);
         _stopButton?.onClick.RemoveListener(OnStopClicked);
 
-        _timerService.CurrentTimeChanged -= OnTimeChanged;
+        _timerService.CurrentTime.Changed -= (_, value) => OnTimeChanged(value);
         _timerService.TimerStarted -= OnTimeChanged;
     }
 
@@ -57,12 +57,6 @@ public class TestSetTimer : MonoBehaviour
 
     private void OnTimeChanged(uint seconds)
     {
-        _inputField.text = FormatTime(seconds);
-    }
-
-    private string FormatTime(uint totalSeconds)
-    {
-        TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
-        return $"{time.Minutes:D2}:{time.Seconds:D2}";
+        _inputField.text = seconds.ToString();
     }
 }
