@@ -2,11 +2,6 @@
 
 public class EnemiesTest : MonoBehaviour
 {
-    [Header("Enemies Prefabs")]
-    [SerializeField] private OrcEnemy _orcEnemyPrefab;
-    [SerializeField] private ElfEnemy _elfEnemyPrefab;
-    [SerializeField] private DragonEnemy _dragonEnemyPrefab;
-
     [Header("Configs")]
     [SerializeField] private OrcEnemyConfig[] _orcEnemiesConfigs;
     [SerializeField] private ElfEnemyConfig[] _elfEnemiesConfigs;

@@ -1079,7 +1079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &902488309
 Transform:
   m_ObjectHideFlags: 0
@@ -1777,9 +1777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4dad3b75fa06a443b3778feb73786b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orcEnemyPrefab: {fileID: 6610728133362232791, guid: ea6a5b5f3344a114cb375a41051949a6, type: 3}
-  _elfEnemyPrefab: {fileID: 46646896644253354, guid: 136cde27b36030341a2ace07a16c58a5, type: 3}
-  _dragonEnemyPrefab: {fileID: 2058419203486518547, guid: 93d9ca106d3a73c4db2973fc2376b96c, type: 3}
   _orcEnemiesConfigs:
   - {fileID: 11400000, guid: 08a7497e24ba6d546857c32aea75d9f3, type: 2}
   - {fileID: 11400000, guid: 06f465ef151a94d49aa26ee3644912f9, type: 2}
@@ -2049,7 +2046,7 @@ RectTransform:
   m_Father: {fileID: 2026462920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2268,7 +2265,7 @@ GameObject:
   - component: {fileID: 1851036968}
   - component: {fileID: 1851036967}
   m_Layer: 5
-  m_Name: ResourcesDisplayCanvas
+  m_Name: ResourcesCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2513,7 +2510,7 @@ RectTransform:
   m_Father: {fileID: 1649170758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2560,8 +2557,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1552078148}
+  - {fileID: 1202602010}
   - {fileID: 902488309}
   - {fileID: 1287925036}
   - {fileID: 1305016027}
   - {fileID: 1301270747}
-  - {fileID: 1202602010}
