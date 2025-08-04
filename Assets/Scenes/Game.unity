@@ -1714,6 +1714,7 @@ GameObject:
   - component: {fileID: 1202602010}
   - component: {fileID: 1202602009}
   - component: {fileID: 1202602011}
+  - component: {fileID: 1202602012}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -1764,6 +1765,19 @@ MonoBehaviour:
   _startTimerButton: {fileID: 810332644}
   _togglePauseButton: {fileID: 77167271}
   _stopButton: {fileID: 748310920}
+--- !u!114 &1202602012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202602008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4dad3b75fa06a443b3778feb73786b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 8045167821433828973, guid: 46b67bed131aaa24f8ceaa923eeac8c7, type: 3}
 --- !u!1 &1287925035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2112,6 +2126,7 @@ MonoBehaviour:
   _testSetTimer: {fileID: 1202602011}
   _timerDisplaySlider: {fileID: 1456957313}
   _timerDisplayHearts: {fileID: 1122534634}
+  _enemiesTest: {fileID: 1202602012}
 --- !u!1 &1649170757
 GameObject:
   m_ObjectHideFlags: 0

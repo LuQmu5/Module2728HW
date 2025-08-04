@@ -7,6 +7,7 @@ public class GameBootstrap : MonoBehaviour
     [SerializeField] private TestSetTimer _testSetTimer;
     [SerializeField] private TimerDisplaySlider _timerDisplaySlider;
     [SerializeField] private TimerDisplayHearts _timerDisplayHearts;
+    [SerializeField] private EnemiesTest _enemiesTest;
 
     private void Awake()
     {
@@ -21,5 +22,8 @@ public class GameBootstrap : MonoBehaviour
 
         _timerDisplaySlider.Init(timerService);
         _timerDisplayHearts.Init(timerService);
+
+        EnemyPoolService enemyPoolService = new EnemyPoolService();
+        _enemiesTest.Init(enemyPoolService);
     }
 }
