@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eab1354e52996b46a72a96fa862496b, type: 3}
+  m_Name: Large Orc Config
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: -5495617598579919774, guid: faad3b86b83963b44b1731ad35f930f7, type: 3}
+  <CritChance>k__BackingField: 60
+  <RageCount>k__BackingField: 200

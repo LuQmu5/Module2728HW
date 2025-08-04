@@ -1079,7 +1079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &902488309
 Transform:
   m_ObjectHideFlags: 0
@@ -1777,7 +1777,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4dad3b75fa06a443b3778feb73786b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 8045167821433828973, guid: 46b67bed131aaa24f8ceaa923eeac8c7, type: 3}
+  _orcEnemyPrefab: {fileID: 6610728133362232791, guid: ea6a5b5f3344a114cb375a41051949a6, type: 3}
+  _elfEnemyPrefab: {fileID: 46646896644253354, guid: 136cde27b36030341a2ace07a16c58a5, type: 3}
+  _dragonEnemyPrefab: {fileID: 2058419203486518547, guid: 93d9ca106d3a73c4db2973fc2376b96c, type: 3}
+  _orcEnemiesConfigs:
+  - {fileID: 11400000, guid: 08a7497e24ba6d546857c32aea75d9f3, type: 2}
+  - {fileID: 11400000, guid: 06f465ef151a94d49aa26ee3644912f9, type: 2}
+  - {fileID: 11400000, guid: f5da35fa941bd334aa4e75a44f4b241d, type: 2}
+  _elfEnemiesConfigs:
+  - {fileID: 11400000, guid: fedc461a66ccf064aafcf3dbdda1d153, type: 2}
+  - {fileID: 11400000, guid: bcea6d60cf90c9f4780158607d738c97, type: 2}
+  - {fileID: 11400000, guid: 45cb3951d74f1e1459f23eab9deb73e0, type: 2}
+  _dragonEnemiesConfigs:
+  - {fileID: 11400000, guid: db3a2ad15465e954292feac916ee06b0, type: 2}
+  - {fileID: 11400000, guid: fb11fc2bbe4708d4c8ca6c41bac2fa66, type: 2}
+  - {fileID: 11400000, guid: 14df71ff3f1aa5c42be3578359de9447, type: 2}
 --- !u!1 &1287925035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,7 +2049,7 @@ RectTransform:
   m_Father: {fileID: 2026462920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2499,7 +2513,7 @@ RectTransform:
   m_Father: {fileID: 1649170758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
