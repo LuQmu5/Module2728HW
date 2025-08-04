@@ -12,11 +12,9 @@ public enum ResourceType
 
 public class WalletService
 {
-    private Dictionary<ResourceType, uint> _resourcesMap;
+    private Dictionary<ResourceType, ReactiveVariable<uint>> _resourcesMap;
 
-    public IReadOnlyDictionary<ResourceType, uint> ResourcesMap => _resourcesMap;
-
-    public event Action<ResourceType> ResourceValueChanged;
+    public IReadOnlyDictionary<ResourceType, ReactiveVariable<uint>> ResourcesMap => _resourcesMap;
 
     public WalletService()
     {
@@ -25,11 +23,11 @@ public class WalletService
 
     private void CreateEmptyWallet()
     {
-        _resourcesMap = new Dictionary<ResourceType, uint>();
+        _resourcesMap = new Dictionary<ResourceType, ReactiveVariable<uint>>();
 
         foreach (ResourceType resourceType in Enum.GetValues(typeof(ResourceType)))
         {
-            _resourcesMap.Add(resourceType, 0);
+            _resourcesMap.Add(resourceType, new ReactiveVariable<uint>(0));
         }
     }
 
@@ -38,8 +36,7 @@ public class WalletService
         if (value == 0)
             throw new ArgumentOutOfRangeException(nameof(value) + "can't be equals zero");
 
-        _resourcesMap[resourceType] += value;
-        ResourceValueChanged?.Invoke(resourceType);
+        _resourcesMap[resourceType].Value += value;
     }
 
     public bool TryRemoveResource(ResourceType resourceType, uint value)
@@ -47,11 +44,10 @@ public class WalletService
         if (value == 0)
             throw new ArgumentOutOfRangeException(nameof(value) + "can't be equals zero");
 
-        if (_resourcesMap[resourceType] < value)
+        if (_resourcesMap[resourceType].Value < value)
             return false;
 
-        _resourcesMap[resourceType] -= value;
-        ResourceValueChanged?.Invoke(resourceType);
+        _resourcesMap[resourceType].Value -= value;
 
         return true;
     }

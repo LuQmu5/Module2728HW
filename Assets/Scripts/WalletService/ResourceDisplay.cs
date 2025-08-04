@@ -8,18 +8,24 @@ public class ResourceDisplay : MonoBehaviour
     [SerializeField] private Image _resourceImage;
     [SerializeField] private TMP_Text _resourceValueText;
 
-    public ResourceType Type { get; private set; }
+    private ReactiveVariable<uint> _reactiveVariable;
 
-    public void Init(ResourceType type, Sprite icon, uint value)
+    public void Init(Sprite icon, ReactiveVariable<uint> reactiveVariable)
     {
-        Type = type;
+        _reactiveVariable = reactiveVariable;
+        _reactiveVariable.Changed += UpdateValue;
 
         _resourceImage.sprite = icon;
-        _resourceValueText.text = value.ToString();
+        _resourceValueText.text = _reactiveVariable.Value.ToString();
     }
 
-    public void UpdateValue(uint value)
+    private void OnDestroy()
     {
-        _resourceValueText.text = value.ToString();
+        _reactiveVariable.Changed -= UpdateValue;
+    }
+
+    public void UpdateValue(uint oldValue, uint newValue)
+    {
+        _resourceValueText.text = newValue.ToString();
     }
 }
